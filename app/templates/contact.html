@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block main %}
+
+<div class="header">
+    <h3>Contact Form</h3>
+    <small>Fill in this form to contact owners</small>
+</div>
+
+
+<form method="post" action="{{ url_for('contact') }}">
+    {{ form.csrf_token }}
+    <p>
+      {{ form.name.label }} (Required)</span> <br />
+      <small>Please enter your name</small>
+      {{ form.name(size=32) }}<br />
+
+      {% for error in form.name.errors %}
+      <span style="color: red">{{ error }}</span><br />
+      {% endfor %}
+    </p>
+    <p>
+      {{ form.email.label }} (Required)<br />
+      <small>Please enter your email</small>
+      {{ form.email(size=32) }}<br />
+      {% for error in form.email.errors %}
+      <span style="color: red">{{ error }}</span><br />
+      {% endfor %}
+    </p>
+    <p>
+      {{ form.subject.label }} (Required)<br />
+      <small>Please enter the subject for your message</small>
+      {{ form.subject(size=64) }}<br />
+      {% for error in form.subject.errors %}
+      <span style="color: red">{{ error }}</span><br />
+      {% endfor %}
+    </p>
+    <p>
+      {{ form.message.label }} (Required)<br />
+      <small>Please enter the message you would like to send.</small>
+      {{ form.message(rows=3, cols=50) }}<br />
+      {% for error in form.message.errors %}
+      <span style="color: red">{{ error }}</span><br />
+      {% endfor %}
+    </p>
+    <p>
+      <input type="submit" value="Send" />
+    </p>
+  </form>
+  
+{% endblock %}
